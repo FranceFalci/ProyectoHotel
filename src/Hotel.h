@@ -18,6 +18,7 @@ using namespace std;
 class Hotel {
 private:
 	vector<ReservaAmenities*> reservasAmenities;
+	//vector habitaciones
 public:
 	Hotel();
 	int obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int capacidad);
