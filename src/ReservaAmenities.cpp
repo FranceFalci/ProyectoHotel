@@ -12,6 +12,18 @@ ReservaAmenities::ReservaAmenities() {
 
 }
 
+Fecha *ReservaAmenities::getFecha(){
+	return fecha;
+}
+
+string ReservaAmenities::getNombre(){
+	return nombreAmenities;
+}
+
+string ReservaAmenities::getHora(){
+	return hora;
+}
+
 ReservaAmenities::~ReservaAmenities() {
 	// TODO Auto-generated destructor stub
 }
