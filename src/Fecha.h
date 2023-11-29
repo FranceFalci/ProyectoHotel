@@ -32,7 +32,8 @@ public:
 	short getAnio() const;
 
 	bool esAnioBisiesto(void) const;
-	long int cantidadDiasDelAnio();
+	long int cantidadDiasDelAnioFecha();
+	long int cantidadDias(const Fecha &fecha2);
 
 	bool sonIguales(Fecha &fecha2);
 

@@ -6,13 +6,48 @@
  */
 
 #include "ReservaHabitacion.h"
+#include "Huesped.h"
 
-ReservaHabitacion::ReservaHabitacion() {
-	// TODO Auto-generated constructor stub
+int ReservaHabitacion::autonumerico = 0;
 
-}
+int ReservaHabitacion::getCodigo(){
+	return this->codigo;
+};
 
-ReservaHabitacion::~ReservaHabitacion() {
-	// TODO Auto-generated destructor stub
-}
+int ReservaHabitacion::getNroHabitacion(){
+	return this->nroHabitacion;
+};
+void ReservaHabitacion::agregarHuesped(string nombre, string dni):Huesped(nombre,dni){};
+
+void ReservaHabitacion::agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono):Huesped(nombre,apellido,nroHabitacion,dni,nacionalidad,provincia,mail,domicilio,patente,telefono){};
+
+float ReservaHabitacion::calcularConsumo(){
+	float total = 0 ;
+	for(Consumo* consumo: consumos){
+		total = total + consumo->getPrecio();
+     }
+	return total;
+};
+
+void ReservaHabitacion::agregarConsumo(Consumo *consumo){
+	consumos.push_back(consumo);
+};
+
+
+ReservaHabitacion::ReservaHabitacion(Fecha fechaEntrada,Fecha fechaSalida,int nroHabitacion){
+	this->fechaEntrada = fechaEntrada;
+	this->fechaSalida = fechaSalida;
+	this->nroHabitacion = nroHabitacion;
+	this->codigo = ++this->autonumerico;
+};
+
+ReservaHabitacion::~ReservaHabitacion(){
+	for(Consumo *consumo: consumos){
+		delete consumo;
+	}
+	consumos.clear();
+
+};
+
+
 
