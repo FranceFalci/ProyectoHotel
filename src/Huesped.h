@@ -7,10 +7,26 @@
 
 #ifndef HUESPED_H_
 #define HUESPED_H_
+#include <iostream>
+using namespace std;
 
 class Huesped {
+private:
+	string nombre;
+	string apellido;
+	int nroHabitacion;
+	string dni;
+	string nacionalidad;
+	string provincia;
+	string mail ;
+	string domicilio;
+	string patente;
+	string telefono;
 public:
-	Huesped();
+	void ListarInfo();
+	Huesped(string nombre, string dni);
+	Huesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
+
 	virtual ~Huesped();
 };
 
