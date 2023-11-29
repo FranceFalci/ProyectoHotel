@@ -14,4 +14,4 @@ public:
     float getPrecio();
 };
 
-#endif /* HUESPED_H_ */
+#endif /* CONSUMO_H_ */
