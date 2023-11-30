@@ -29,6 +29,7 @@ public:
 	void agregarReservaAmenities(string nombre, Fecha *fecha, string hora, string dni, int nroHabitacion);
 	bool verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre);
 	ReservaHabitacion buscarReserva(int nroReserva);
+	int obtenerHoraDelSistema();
 	virtual ~Hotel();
 };
 

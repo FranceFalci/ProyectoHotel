@@ -6,6 +6,8 @@
  */
 
 #include "Hotel.h"
+#include <chrono>
+#include <ctime>
 
 Hotel::Hotel() {
 	// TODO Auto-generated constructor stub
@@ -40,17 +42,18 @@ void Hotel::checkIn(int nroHabitacion, vector<Huesped*> huespedes){
 	}
 }
 
-void Hotel::checkOut(int nroReserva){ //pongo void o dejo float?
+void Hotel::checkOut(int nroReserva){
 	ReservaHabitacion reservaEncontrada = buscarReserva(nroReserva);
-	Fecha fechaActual(30, 11, 2023); //cambiar despues
+	Fecha fechaActual;
+	fechaActual.setFechaActual();
 	if (reservaEncontrada.getFechaSalida() == fechaActual) {
-		if (100000 < 110000) {
+		if (obtenerHoraDelSistema() < 11) {
 			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva)<<endl;
 		}
-		if (100000 >= 110000 && 100000 <= 130000) {
+		if (obtenerHoraDelSistema() >= 11 && obtenerHoraDelSistema() <= 13) {
 			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoPorNoche()/2 <<endl;
 		}
-		if (100000 > 130000) {
+		if (obtenerHoraDelSistema() > 13) {
 			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoPorNoche()<<endl;
 		}
 	}
@@ -82,6 +85,22 @@ ReservaHabitacion Hotel::buscarReserva(int nroReserva){
 		}
 	}
 	return nullptr;
+}
+
+int Hotel::obtenerHoraDelSistema(){
+	// Obtener el reloj de sistema actual
+	auto now = std::chrono::system_clock::now();
+
+	// Convertir a un formato de tiempo en C
+	std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+	// Estructura para almacenar la hora actual
+	std::tm local_time = *std::localtime(&now_c);
+
+	// Obtener solo la hora actual
+	int hora_actual = local_time.tm_hour;
+
+	return hora_actual;
 }
 
 Hotel::~Hotel() {
