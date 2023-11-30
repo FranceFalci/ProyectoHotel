@@ -26,7 +26,7 @@ public:
     void agregarHuesped(string nombre, string dni, int nroReserva);
     void agregarHuesped(string nombre,string apellido, string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono, int nroReserva);
     float calcularCostoRestante(int nroReserva);
-    ReservaHabitacion buscarReserva(int nroReserva);
+    ReservaHabitacion* buscarReserva(int nroReserva);
 };
 
 #endif /* HABITACION_H_ */
