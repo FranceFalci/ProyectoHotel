@@ -21,7 +21,7 @@ class ReservaHabitacion {
 	int nroHabitacion;
 	vector<Consumo*> consumos;
 public:
-	int CantidadDias();
+	int cantidadDias();
 	int getCodigo();
 	int getNroHabitacion();
 	Fecha *getFechaSalida();

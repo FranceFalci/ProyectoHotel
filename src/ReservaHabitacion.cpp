@@ -26,7 +26,7 @@ Fecha *ReservaHabitacion::getFechaEntrada(){
 	return this->fechaEntrada;
 };
 
-int ReservaHabitacion::CantidadDias(){
+int ReservaHabitacion::cantidadDias(){
 	return this->fechaEntrada.diferenciaEnDias(this->fechaSalida);
 };
 
