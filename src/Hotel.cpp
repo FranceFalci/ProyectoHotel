@@ -74,13 +74,23 @@ bool Hotel::verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre)
 	return false;
 }
 
-/*ReservaHabitacion Hotel::buscarReserva(int nroReserva){
+ReservaHabitacion Hotel::buscarReserva(int nroReserva){
 	for (size_t i = 0; i < habitaciones.size(); ++i) {
-
+		ReservaHabitacion reservaBuscada = habitaciones[i]->buscarReserva(nroReserva);
+		if (reservaBuscada != NULL) {
+			return reservaBuscada;
+		}
 	}
-}*/
+	return nullptr;
+}
 
 Hotel::~Hotel() {
-	// TODO Auto-generated destructor stub
+	for (size_t i = 0; i < habitaciones.size(); ++i) {
+		delete habitaciones[i];
+	}
+
+	for (size_t i = 0; i < reservasAmenities.size(); ++i) {
+		delete reservasAmenities[i];
+	}
 }
 
