@@ -15,8 +15,8 @@
 
 class ReservaHabitacion {
 	static int autonumerico;
-	Fecha fechaEntrada;
-	Fecha fechaSalida;
+	Fecha *fechaEntrada;
+	Fecha *fechaSalida;
 	int codigo;
 	int nroHabitacion;
 	vector<Consumo*> consumos;
@@ -31,7 +31,7 @@ public:
 	void agregarHuesped(string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
 	float calcularConsumo();
 	void agregarConsumo(Consumo *consumo);
-	ReservaHabitacion(Fecha fechaEntrada,Fecha fechaSalida,int nroHabitacion);
+	ReservaHabitacion(Fecha *fechaEntrada,Fecha *fechaSalida,int nroHabitacion);
 	virtual ~ReservaHabitacion();
 };
 

@@ -18,10 +18,10 @@ float Habitacion::calcularCostoPorNoche(){
     return this->capacidad*this->precioBase;
 }
 
-float Habitacion::calcularCostoTotalReserva(int nroReserva){
+/*float Habitacion::calcularCostoTotalReserva(int nroReserva){
     int cantidad = buscarReserva(nroReserva)->cantidadDias();
     return calcularCostoPorNoche()*cantidad;
-}
+}*/
 
 void Habitacion::listarInfo(){
     std::cout << "Número de Habitación: " << nroHabitacion << std::endl;
@@ -42,7 +42,7 @@ float Habitacion::getSenia(int nroReserva){
     return calcularCostoTotalReserva(nroReserva)*0.3;
 }
 
-void Habitacion::crearReserva(Fecha &fechaEntrada, Fecha &fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono){
+void Habitacion::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono){
     ReservaHabitacion *reserva= new ReservaHabitacion(fechaEntrada, fechaSalida, this->nroHabitacion);
     Reservas.push_back(reserva);
     
@@ -74,15 +74,15 @@ void Habitacion::agregarHuesped(string nombre, string apellido, string dni, stri
 }
 
 
-float Habitacion::calcularCostoTotalReserva(int nroReserva) {
-    ReservaHabitacion* reserva = buscarReserva(nroReserva);
-    if (reserva) {
-        int cantidadDias = reserva->cantidadDias();
-        return calcularCostoPorNoche() * cantidadDias;
-    } else {
-        // Manejar el caso cuando la reserva no se encuentra
-        return 0.0; // O cualquier valor predeterminado
-    }
+float Habitacion::calcularCostoTotalReserva(int nroReserva){
+	ReservaHabitacion* reserva = buscarReserva(nroReserva);
+	if (reserva) {
+		int cantidadDias = reserva->cantidadDias();
+		return calcularCostoPorNoche() * cantidadDias;
+	} else {
+		// Manejar el caso cuando la reserva no se encuentra
+		return 0.0; // O cualquier valor predeterminado
+	}
 }
 
 
@@ -94,6 +94,6 @@ ReservaHabitacion* Habitacion::buscarReserva(int nroReserva) {
         }
     }
     // Si no se encuentra la reserva, devolver un puntero nulo.
-    /* return nullptr; *//*  arreglar despues */
+    return nullptr;
 }
 

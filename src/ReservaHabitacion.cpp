@@ -27,7 +27,7 @@ Fecha *ReservaHabitacion::getFechaEntrada(){
 };
 
 int ReservaHabitacion::cantidadDias(){
-	return this->fechaEntrada.diferenciaEnDias(this->fechaSalida);
+	return fechaEntrada->diferenciaEnDias(*fechaSalida);
 };
 
 
@@ -50,7 +50,7 @@ void ReservaHabitacion::agregarConsumo(Consumo *consumo){
 };
 
 
-ReservaHabitacion::ReservaHabitacion(Fecha fechaEntrada,Fecha fechaSalida,int nroHabitacion){
+ReservaHabitacion::ReservaHabitacion(Fecha *fechaEntrada,Fecha *fechaSalida,int nroHabitacion){
 	this->fechaEntrada = fechaEntrada;
 	this->fechaSalida = fechaSalida;
 	this->nroHabitacion = nroHabitacion;
