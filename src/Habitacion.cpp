@@ -94,6 +94,23 @@ ReservaHabitacion* Habitacion::buscarReserva(int nroReserva) {
         }
     }
     // Si no se encuentra la reserva, devolver un puntero nulo.
-    /* return nullptr; *//*  arreglar despues */
+    return nullptr;
 }
 
+/* bool Habitacion::estaDisponible(Fecha fechaInicio, Fecha fechaFin) {
+    for (ReservaHabitacion*& reserva : Reservas) {
+        if (fechaFin <= reserva->getFechaEntrada() || fechaInicio >= reserva->getFechaSalida()) { //sonsultar mas tarde
+            return false;
+        }
+    }
+    return true;
+} */
+
+bool Habitacion::estaDisponible(Fecha* fechaInicio, Fecha* fechaFin) {
+    for (ReservaHabitacion*& reserva : Reservas) {
+        if (!(fechaFin <= reserva->getFechaEntrada() || fechaInicio >= reserva->getFechaSalida())) {
+            return false;
+        }
+    }
+    return true;
+}
