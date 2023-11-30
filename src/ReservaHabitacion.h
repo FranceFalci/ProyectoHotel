@@ -21,10 +21,12 @@ class ReservaHabitacion {
 	int nroHabitacion;
 	vector<Consumo*> consumos;
 public:
-	int CantidadDias();
+	int cantidadDias();
 	int getCodigo();
 	int getNroHabitacion();
 	Fecha *getFechaSalida();
+	Fecha *getFechaEntrada();
+
 	void agregarHuesped(string nombre, string dni);
 	void agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
 	float calcularConsumo();
