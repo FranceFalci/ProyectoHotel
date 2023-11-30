@@ -25,7 +25,7 @@ public:
 	int obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int capacidad);
 	void crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad, string nombre, string apellido, string DNI, string nacionalidad, string provincia, string email, string domicilio, string patenteVehiculo, string telefono);
 	void checkIn(int nroHabitacion, vector<Huesped*> huespedes);
-	float checkOut(int nroReserva);
+	void checkOut(int nroReserva);
 	void agregarReservaAmenities(string nombre, Fecha *fecha, string hora, string dni, int nroHabitacion);
 	bool verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre);
 	ReservaHabitacion buscarReserva(int nroReserva);

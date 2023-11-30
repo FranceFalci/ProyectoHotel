@@ -28,7 +28,7 @@ public:
 	Fecha *getFechaEntrada();
 
 	void agregarHuesped(string nombre, string dni);
-	void agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
+	void agregarHuesped(string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
 	float calcularConsumo();
 	void agregarConsumo(Consumo *consumo);
 	ReservaHabitacion(Fecha fechaEntrada,Fecha fechaSalida,int nroHabitacion);

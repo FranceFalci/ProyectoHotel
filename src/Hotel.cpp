@@ -33,14 +33,14 @@ void Hotel::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad,
 void Hotel::checkIn(int nroHabitacion, vector<Huesped*> huespedes){
 	if (150000 >= 130000) {  //cambiar por hora del sistema
 		for (size_t i = 0; i < huespedes.size(); ++i) {
-			habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->nombre, huespedes[i]->getDni(), nroHabitacion);
+			habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->nombre, huespedes[i]->getDNI(), nroHabitacion);
 		}
 	} else {
 		cout<<"Horario no habilitado para checkin";
 	}
 }
 
-float Hotel::checkOut(int nroReserva){ //pongo void o dejo float?
+void Hotel::checkOut(int nroReserva){ //pongo void o dejo float?
 	ReservaHabitacion reservaEncontrada = buscarReserva(nroReserva);
 	Fecha fechaActual(30, 11, 2023); //cambiar despues
 	if (reservaEncontrada.getFechaSalida() == fechaActual) {

@@ -35,7 +35,7 @@ int ReservaHabitacion::cantidadDias(){
 
 void ReservaHabitacion::agregarHuesped(string nombre, string dni):Huesped(nombre,dni){};
 
-void ReservaHabitacion::agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono):Huesped(nombre,apellido,nroHabitacion,dni,nacionalidad,provincia,mail,domicilio,patente,telefono){};
+void ReservaHabitacion::agregarHuesped(string nombre,string apellido, string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono):Huesped(nombre,apellido,nroHabitacion,dni,nacionalidad,provincia,mail,domicilio,patente,telefono){};
 
 float ReservaHabitacion::calcularConsumo(){
 	float total = 0 ;
