@@ -17,6 +17,11 @@ int ReservaHabitacion::getCodigo(){
 int ReservaHabitacion::getNroHabitacion(){
 	return this->nroHabitacion;
 };
+
+Fecha *ReservaHabitacion::getFechaSalida(){
+	return this->fechaSalida;
+}
+
 void ReservaHabitacion::agregarHuesped(string nombre, string dni):Huesped(nombre,dni){};
 
 void ReservaHabitacion::agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono):Huesped(nombre,apellido,nroHabitacion,dni,nacionalidad,provincia,mail,domicilio,patente,telefono){};

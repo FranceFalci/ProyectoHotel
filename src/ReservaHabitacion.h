@@ -24,6 +24,7 @@ public:
 	int CantidadDias();
 	int getCodigo();
 	int getNroHabitacion();
+	Fecha *getFechaSalida();
 	void agregarHuesped(string nombre, string dni);
 	void agregarHuesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
 	float calcularConsumo();

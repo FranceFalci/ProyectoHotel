@@ -14,16 +14,17 @@ using namespace std;
 #include "Fecha.h"
 #include "Huesped.h"
 #include "ReservaHabitacion.h"
+#include "Habitacion.h"
 
 class Hotel {
 private:
 	vector<ReservaAmenities*> reservasAmenities;
-	//vector habitaciones
+	vector<Habitacion*> habitaciones;
 public:
 	Hotel();
 	int obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int capacidad);
 	void crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad, string nombre, string apellido, string DNI, string nacionalidad, string provincia, string email, string domicilio, string patenteVehiculo, string telefono);
-	bool checkIn(int nroHabitacion, vector<Huesped*> huespedes);
+	void checkIn(int nroHabitacion, vector<Huesped*> huespedes);
 	float checkOut(int nroReserva);
 	void agregarReservaAmenities(string nombre, Fecha *fecha, string hora, string dni, int nroHabitacion);
 	bool verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre);

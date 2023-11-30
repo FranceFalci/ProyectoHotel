@@ -7,9 +7,11 @@
 
 #include "ReservaAmenities.h"
 
-ReservaAmenities::ReservaAmenities() {
-	// TODO Auto-generated constructor stub
-
+ReservaAmenities::ReservaAmenities(Fecha *fecha, string hora, string dni, int nroHabitacion) {
+	this->fecha = fecha;
+	this->hora = hora;
+	this->dni = dni;
+	this->nroHabitacion = nroHabitacion;
 }
 
 Fecha *ReservaAmenities::getFecha(){

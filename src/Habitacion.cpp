@@ -33,6 +33,10 @@ int Habitacion::getCodigo(){
     return nroHabitacion;
 }
 
+int Habitacion::getCapacidad(){
+	return capacidad;
+}
+
 float Habitacion::getSenia(int nroReserva){
     return calcularCostoTotalReserva(nroReserva)*0.3;
 }

@@ -19,7 +19,7 @@ private:
 	string dni;
 	int nroHabitacion;
 public:
-	ReservaAmenities();
+	ReservaAmenities(Fecha *fecha, string hora, string dni, int nroHabitacion);
 	Fecha *getFecha();
 	string getNombre();
 	string getHora();
