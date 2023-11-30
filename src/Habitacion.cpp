@@ -19,7 +19,7 @@ float Habitacion::calcularCostoPorNoche(){
 }
 
 float Habitacion::calcularCostoTotalReserva(int nroReserva){
-    int cantidad = buscarReserva(nroReserva).cantidadDias();
+    int cantidad = buscarReserva(nroReserva)->cantidadDias();
     return calcularCostoPorNoche()*cantidad;
 }
 
@@ -53,8 +53,12 @@ void Habitacion::crearReserva(Fecha &fechaEntrada, Fecha &fechaSalida, string no
 }
 
 void Habitacion::agregarHuesped(string nombre, string dni, int nroReserva) {
-    ReservaHabitacion& reserva = buscarReserva(nroReserva);
-    reserva.agregarHuesped(nombre, dni);
+    ReservaHabitacion* reserva = buscarReserva(nroReserva);
+    if (reserva) {
+        reserva->agregarHuesped(nombre, dni);
+    } else {
+        std::cout << "La reserva no fue encontrada." << std::endl;
+    }
 }
 
 void Habitacion::agregarHuesped(string nombre, string apellido, string dni, string nacionalidad, string provincia, string mail, string domicilio, string patente, string telefono, int nroReserva) {
