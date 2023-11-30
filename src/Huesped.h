@@ -24,6 +24,8 @@ private:
 	string telefono;
 public:
 	void ListarInfo();
+	string getDNI();
+	string getNombre();
 	Huesped(string nombre, string dni);
 	Huesped(string nombre,string apellido,int nroHabitacion,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
 

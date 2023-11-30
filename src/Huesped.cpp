@@ -29,6 +29,16 @@ Huesped::Huesped(string nombre, string apellido, int nroHabitacion, string dni, 
     this->telefono = telefono;
 }
 
+
+string Huesped::getDNI(){
+	return this->dni;
+};
+
+string Huesped::getNombre(){
+	return this->nombre;
+};
+
+
 Huesped::~Huesped() {
 	// TODO Auto-generated destructor stub
 }

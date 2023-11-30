@@ -20,7 +20,13 @@ int ReservaHabitacion::getNroHabitacion(){
 
 Fecha *ReservaHabitacion::getFechaSalida(){
 	return this->fechaSalida;
-}
+};
+
+int ReservaHabitacion::CantidadDias(){
+	return this->fechaEntrada.diferenciaEnDias(this->fechaSalida);
+};
+
+
 
 void ReservaHabitacion::agregarHuesped(string nombre, string dni):Huesped(nombre,dni){};
 

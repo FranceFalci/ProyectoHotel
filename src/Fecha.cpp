@@ -95,7 +95,7 @@ short Fecha::getAnio() const {
 	return anio;
 }
 
-long int Fecha::cantidadDiasDelAnioFecha(){
+long int Fecha::cantidadDiasDelAnio() const{
 	long int cantidadDias = 0;
 	int febrero=28 + esAnioBisiesto();
 		switch (mes) {
@@ -170,26 +170,25 @@ ostream& operator<<(ostream &salida,const Fecha &f) {
 	  return false;
  };
 
- long int Fecha::cantidadDias(const Fecha &fecha2) {
-     long int dif = 0;
 
-     // Verificar si la fecha actual es mayor o igual a fecha2
-     if (*this >= fecha2) {
-         // Calcular la cantidad de días completos entre los años
-         long int diasAnios = cantidadDiasAniosCompletos(fecha2.getAnio(), this->getAnio());
 
-         // Calcular la cantidad de días en el año actual hasta la fecha actual
-         long int dias1 = cantidadDiasDelAnioFecha() + diasAnios;
+ int Fecha::diferenciaEnDias(const Fecha &otraFecha) const {
+     int dif = 0;
 
-         // Calcular la cantidad de días en el año de fecha2 hasta fecha2
-         long int dias2 = fecha2.cantidadDiasDelAnioFecha();
+    if (*this >= otraFecha) {
+        long int diasAnios = cantidadDiasAniosCompletos(otraFecha.getAnio(), this->getAnio());
+        long int diasOtraFecha = otraFecha.cantidadDiasDelAnio();
+        long int diasActual = this->cantidadDiasDelAnio() + diasAnios;
 
-         // Calcular la diferencia total
-         dif = dias1 - dias2;
-     }
+        dif = diasActual - diasOtraFecha;
+    } else {
+        // Si la otra fecha es mayor, calcula la diferencia invirtiendo los argumentos
+        dif = -otraFecha.diferenciaEnDias(*this);
+    }
 
-     return dif;
- }
+    return dif;
+}
+
 
 
 
