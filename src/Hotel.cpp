@@ -23,19 +23,20 @@ int Hotel::obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int 
 }
 
 void Hotel::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad, string nombre, string apellido, string DNI, string nacionalidad, string provincia, string email, string domicilio, string patenteVehiculo, string telefono){
-	int nroHabitacion;
-	nroHabitacion = obtenerHabitacionDisponible(fechaEntrada, fechaSalida, capacidad);
+	int nroHabitacion = obtenerHabitacionDisponible(fechaEntrada, fechaSalida, capacidad);
 	if (nroHabitacion != -1) {
-
+		habitaciones[nroHabitacion]->crearReserva(fechaEntrada, fechaSalida, nombre, apellido, DNI, nacionalidad, provincia, email, domicilio, patenteVehiculo, telefono);
+		cout<<"Reserva creada con exito";
 	} else {
 		cout<<"Error. No hay habitacion disponible";
 	}
 }
 
 void Hotel::checkIn(int nroHabitacion, vector<Huesped*> huespedes){
-	if (150000 >= 130000) {  //cambiar por hora del sistema
+	if (obtenerHoraDelSistema() >= 13) {
 		for (size_t i = 0; i < huespedes.size(); ++i) {
-			habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->nombre, huespedes[i]->getDNI(), nroHabitacion);
+			habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->getNombre(), huespedes[i]->getDNI(), nroHabitacion);
+			cout<<"Checkin realizado";
 		}
 	} else {
 		cout<<"Horario no habilitado para checkin";
@@ -43,18 +44,18 @@ void Hotel::checkIn(int nroHabitacion, vector<Huesped*> huespedes){
 }
 
 void Hotel::checkOut(int nroReserva){
-	ReservaHabitacion reservaEncontrada = buscarReserva(nroReserva);
+	ReservaHabitacion *reservaEncontrada = buscarReserva(nroReserva);
 	Fecha fechaActual;
 	fechaActual.setFechaActual();
-	if (reservaEncontrada.getFechaSalida() == fechaActual) {
+	if (fechaActual.sonIguales(*reservaEncontrada->getFechaSalida())) {
 		if (obtenerHoraDelSistema() < 11) {
-			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva)<<endl;
+			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoRestante(nroReserva)<<endl;
 		}
 		if (obtenerHoraDelSistema() >= 11 && obtenerHoraDelSistema() <= 13) {
-			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoPorNoche()/2 <<endl;
+			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoPorNoche()/2 <<endl;
 		}
 		if (obtenerHoraDelSistema() > 13) {
-			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada.getNroHabitacion()]->calcularCostoPorNoche()<<endl;
+			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoPorNoche()<<endl;
 		}
 	}
 }
@@ -68,6 +69,11 @@ void Hotel::agregarReservaAmenities(string nombre, Fecha *fecha, string hora, st
 	}
 }
 
+void Hotel::agregarHabitacion(int nroCamas, int capacidad, float precioBase){
+	Habitacion *nuevaHabitacion = new Habitacion(nroCamas, capacidad, precioBase);
+	habitaciones.push_back(nuevaHabitacion);
+}
+
 bool Hotel::verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre){
 	for (size_t i = 0; i < reservasAmenities.size() ; ++i) {
 		if (reservasAmenities[i]->getFecha() != fecha && reservasAmenities[i]->getNombre() != nombre && reservasAmenities[i]->getHora() != hora) {
@@ -77,13 +83,15 @@ bool Hotel::verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre)
 	return false;
 }
 
-ReservaHabitacion Hotel::buscarReserva(int nroReserva){
+ReservaHabitacion *Hotel::buscarReserva(int nroReserva){
 	for (size_t i = 0; i < habitaciones.size(); ++i) {
-		ReservaHabitacion reservaBuscada = habitaciones[i]->buscarReserva(nroReserva);
-		if (reservaBuscada != NULL) {
+		ReservaHabitacion *reservaBuscada = habitaciones[i]->buscarReserva(nroReserva);
+		if (reservaBuscada != nullptr) {
+			cout << "Reserva encontrada en la habitacion " << i << endl;
 			return reservaBuscada;
 		}
 	}
+	cout << "La reserva no se encontró en ninguna habitacion." << endl;
 	return nullptr;
 }
 

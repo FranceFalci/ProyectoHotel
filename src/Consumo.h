@@ -1,17 +1,19 @@
 #ifndef CONSUMO_H_
 #define CONSUMO_H_
-#include <string>
+#include <iostream>
+using namespace std;
 
 class Consumo {
     static int autonumerico;
     int codigo;
-    std::string nombre;
+    string nombre;
     float precio;
 public:
-	Consumo(std::string nombre, float precio);
-	virtual ~Consumo();
-    void listarInfo();
+	Consumo(string nombre, float precio);
+	void listarInfo();
     float getPrecio();
+	virtual ~Consumo();
+
 };
 
 #endif /* CONSUMO_H_ */

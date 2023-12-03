@@ -39,7 +39,7 @@ public:
 
 	//Sobrecarga de operadores
 	friend bool operator>=(Fecha fecha1, Fecha fecha2);
-//	friend bool operator==(Fecha fecha1, Fecha fecha2);
+	//friend bool operator==(Fecha fecha1, Fecha fecha2);
 
 	friend long int operator-(Fecha &fecha1, Fecha &fecha2);//Retorna la diferencia de d�as entre 2 fechas
 

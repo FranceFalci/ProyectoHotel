@@ -9,9 +9,8 @@
 #define RESERVAHABITACION_H_
 #include "Fecha.h"
 #include "Huesped.h"
-#include <vector>
 #include "Consumo.h"
-
+#include <vector>
 
 class ReservaHabitacion {
 	static int autonumerico;
@@ -20,18 +19,20 @@ class ReservaHabitacion {
 	int codigo;
 	int nroHabitacion;
 	vector<Consumo*> consumos;
+	vector<Huesped*> huespedes;
 public:
-	int cantidadDias();
+	ReservaHabitacion(Fecha *fechaEntrada, Fecha *fechaSalida, int nroHabitacion);
 	int getCodigo();
 	int getNroHabitacion();
 	Fecha *getFechaSalida();
 	Fecha *getFechaEntrada();
+	int cantidadDias();
 
 	void agregarHuesped(string nombre, string dni);
 	void agregarHuesped(string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
-	float calcularConsumo();
 	void agregarConsumo(Consumo *consumo);
-	ReservaHabitacion(Fecha *fechaEntrada,Fecha *fechaSalida,int nroHabitacion);
+	float calcularConsumo();
+	void listarInfo();
 	virtual ~ReservaHabitacion();
 };
 

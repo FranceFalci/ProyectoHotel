@@ -7,14 +7,11 @@
 
 #include "Huesped.h"
 
-Huesped::Huesped(string nombre, string dni) {
+Huesped::Huesped(string nombre, string dni, int nroHabitacion) {
 	this->nombre = nombre;
 	this->dni = dni;
+    this->nroHabitacion = nroHabitacion;
 }
-void Huesped::ListarInfo(){
-	cout << "Nombre:" <<this->nombre<< endl;
-	cout << "DNI:" <<this->dni<< endl;
-};
 
 Huesped::Huesped(string nombre, string apellido, int nroHabitacion, string dni, string nacionalidad, string provincia, string mail, string domicilio, string patente, string telefono) {
     this->nombre = nombre;
@@ -29,13 +26,17 @@ Huesped::Huesped(string nombre, string apellido, int nroHabitacion, string dni, 
     this->telefono = telefono;
 }
 
+void Huesped::ListarInfo(){
+	cout << "Nombre:" <<nombre<< endl;
+	cout << "DNI:" <<dni<< endl;
+};
 
 string Huesped::getDNI(){
-	return this->dni;
+	return dni;
 };
 
 string Huesped::getNombre(){
-	return this->nombre;
+	return nombre;
 };
 
 

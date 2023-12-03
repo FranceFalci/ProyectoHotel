@@ -1,23 +1,23 @@
 #include "Consumo.h"
-#include <iostream>
 int Consumo::autonumerico = 1;
 
-Consumo::Consumo(std::string nombre, float precio) {
-	this->codigo=autonumerico++;
-    this->nombre=nombre;
-    this->precio=precio;
-}
-
-Consumo::~Consumo() {
-	// TODO Auto-generated destructor stub
+Consumo::Consumo(string nombre, float precio) {
+	this->codigo = autonumerico++;
+    this->nombre = nombre;
+    this->precio = precio;
 }
 
 void Consumo::listarInfo(){
-    std::cout <<"codigo: "<< codigo << std::endl; 
-    std::cout <<"nombre: "<< nombre << std::endl; 
-    std::cout <<"precio: "<< precio << std::endl; 
+    cout <<"Codigo: "<< codigo << endl;
+    cout <<"Nombre: "<< nombre << endl;
+    cout <<"Precio: $"<< precio << endl;
+    cout<<"\n";
 }
 
 float Consumo::getPrecio(){
     return precio;
+}
+
+Consumo::~Consumo() {
+	// TODO Auto-generated destructor stub
 }

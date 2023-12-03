@@ -27,8 +27,9 @@ public:
 	void checkIn(int nroHabitacion, vector<Huesped*> huespedes);
 	void checkOut(int nroReserva);
 	void agregarReservaAmenities(string nombre, Fecha *fecha, string hora, string dni, int nroHabitacion);
+	void agregarHabitacion(int nroCamas, int capacidad, float precioBase);
 	bool verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre);
-	ReservaHabitacion buscarReserva(int nroReserva);
+	ReservaHabitacion *buscarReserva(int nroReserva);
 	int obtenerHoraDelSistema();
 	virtual ~Hotel();
 };
