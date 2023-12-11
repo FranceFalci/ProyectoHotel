@@ -161,7 +161,7 @@ ostream& operator<<(ostream &salida,const Fecha &f) {
 // }
 
 
- bool Fecha::sonIguales( Fecha &fecha2){
+ bool Fecha::sonIguales( const Fecha &fecha2){
 	  if (this->getDia() == fecha2.getDia() &&
 	      this->getMes() == fecha2.getMes() &&
 	      this->getAnio() == fecha2.getAnio()){

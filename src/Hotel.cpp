@@ -13,7 +13,7 @@ Hotel::Hotel() {
 	// TODO Auto-generated constructor stub
 }
 
-int Hotel::obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int capacidad){
+int Hotel::obtenerHabitacionDisponible(Fecha &fechaInicio, Fecha &fechaFin, int capacidad){
 	for (size_t i = 0; i < habitaciones.size() ; i++) {
 		if (habitaciones[i]->estaDisponible(fechaInicio, fechaFin) && habitaciones[i]->getCapacidad() >= capacidad) {
 			return habitaciones[i]->getCodigo();
@@ -22,9 +22,14 @@ int Hotel::obtenerHabitacionDisponible(Fecha *fechaInicio, Fecha *fechaFin, int 
 	return -1;
 }
 
-void Hotel::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad, string nombre, string apellido, string DNI, string nacionalidad, string provincia, string email, string domicilio, string patenteVehiculo, string telefono){
+void Hotel::crearReserva(Fecha &fechaEntrada, Fecha &fechaSalida, int capacidad, string nombre, string apellido, string DNI, string nacionalidad, string provincia, string email, string domicilio, string patenteVehiculo, string telefono){
+	cout<<" adentro de crear reserva"<<endl;
 	int nroHabitacion = obtenerHabitacionDisponible(fechaEntrada, fechaSalida, capacidad);
+	cout<<"hab disponible"<<nroHabitacion<<endl;
+
 	if (nroHabitacion != -1) {
+		cout<<" adentro del if"<<endl;
+
 		habitaciones[nroHabitacion]->crearReserva(fechaEntrada, fechaSalida, nombre, apellido, DNI, nacionalidad, provincia, email, domicilio, patenteVehiculo, telefono);
 		cout<<"Reserva creada con exito";
 	} else {
@@ -32,22 +37,33 @@ void Hotel::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, int capacidad,
 	}
 }
 
-void Hotel::checkIn(int nroHabitacion, vector<Huesped*> huespedes){
-	if (obtenerHoraDelSistema() >= 13) {
-		for (size_t i = 0; i < huespedes.size(); ++i) {
-			habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->getNombre(), huespedes[i]->getDNI(), nroHabitacion);
-			cout<<"Checkin realizado";
+void Hotel::checkIn(int nroReserva, vector<Huesped*> huespedes){
+	ReservaHabitacion *reservaEncontrada = buscarReserva(nroReserva);
+	int nroHabitacion = reservaEncontrada->getNroHabitacion();
+	Fecha fechaActual;
+	fechaActual.setFechaActual();
+
+	if (fechaActual.sonIguales(reservaEncontrada->getFechaEntrada())) {
+		if (obtenerHoraDelSistema() >= 13) {
+			for (size_t i = 0; i < huespedes.size(); ++i) {
+				habitaciones[nroHabitacion]->agregarHuesped(huespedes[i]->getNombre(), huespedes[i]->getDNI(), nroReserva);
+			}
+			cout<<"Checkin realizado"<<endl;
+		} else {
+			cout<<"Horario no habilitado para checkin";
 		}
-	} else {
-		cout<<"Horario no habilitado para checkin";
+	}else {
+		cout<<"ERROR! Fecha no correspondiente al checkin de la reserva"<<endl;
 	}
 }
 
 void Hotel::checkOut(int nroReserva){
+	cout<<"Realizando check out.."<<endl;
 	ReservaHabitacion *reservaEncontrada = buscarReserva(nroReserva);
 	Fecha fechaActual;
 	fechaActual.setFechaActual();
-	if (fechaActual.sonIguales(*reservaEncontrada->getFechaSalida())) {
+	if (fechaActual.sonIguales(reservaEncontrada->getFechaSalida())) {
+//	if(true){
 		if (obtenerHoraDelSistema() < 11) {
 			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoRestante(nroReserva)<<endl;
 		}
@@ -57,15 +73,19 @@ void Hotel::checkOut(int nroReserva){
 		if (obtenerHoraDelSistema() > 13) {
 			cout<<"Importe a pagar: $"<<habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoRestante(nroReserva) + habitaciones[reservaEncontrada->getNroHabitacion()]->calcularCostoPorNoche()<<endl;
 		}
+	}else{
+		cout<<"ERROR! no es fecha de salida para la correspondiente reserva"<<endl;
 	}
 }
 
-void Hotel::agregarReservaAmenities(string nombre, Fecha *fecha, string hora, string dni, int nroHabitacion){
+void Hotel::agregarReservaAmenities(string nombre, Fecha &fecha, string hora, string dni, int nroHabitacion){
 	if (verDisponibilidadAmenities(fecha, hora, nombre)) {
-		ReservaAmenities *amenities = new ReservaAmenities(fecha, hora, dni, nroHabitacion);
+		ReservaAmenities *amenities = new ReservaAmenities(fecha, hora, dni, nroHabitacion,nombre);
 		reservasAmenities.push_back(amenities);
+		cout<<"Amenities reservado. Nombre: "<<nombre<<" en la fecha:  "<<fecha<<" y hora: "<<hora<<endl;
+
 	} else {
-		cout<<"Amenities ocupado";
+		cout<<"ERROR! Amenities ocupado"<<endl;;
 	}
 }
 
@@ -74,20 +94,24 @@ void Hotel::agregarHabitacion(int nroCamas, int capacidad, float precioBase){
 	habitaciones.push_back(nuevaHabitacion);
 }
 
-bool Hotel::verDisponibilidadAmenities(Fecha *fecha, string hora, string nombre){
-	for (size_t i = 0; i < reservasAmenities.size() ; ++i) {
-		if (reservasAmenities[i]->getFecha() != fecha && reservasAmenities[i]->getNombre() != nombre && reservasAmenities[i]->getHora() != hora) {
-			return true;
-		}
-	}
-	return false;
+
+bool Hotel::verDisponibilidadAmenities(Fecha &fecha, string hora, string nombre) {
+    for (size_t i = 0; i < reservasAmenities.size(); ++i) {
+        if (fecha.sonIguales(reservasAmenities[i]->getFecha()) &&
+            reservasAmenities[i]->getNombre() == nombre &&
+            reservasAmenities[i]->getHora() == hora) {
+            return false;  // Reservation found that matches the conditions
+        }
+    }
+    return true;  // No matching reservation found
 }
+
 
 ReservaHabitacion *Hotel::buscarReserva(int nroReserva){
 	for (size_t i = 0; i < habitaciones.size(); ++i) {
 		ReservaHabitacion *reservaBuscada = habitaciones[i]->buscarReserva(nroReserva);
 		if (reservaBuscada != nullptr) {
-			cout << "Reserva encontrada en la habitacion " << i << endl;
+//			cout << "Reserva encontrada en la habitacion " << i << endl;
 			return reservaBuscada;
 		}
 	}

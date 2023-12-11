@@ -10,7 +10,7 @@
 
 int ReservaHabitacion::autonumerico = 0;
 
-ReservaHabitacion::ReservaHabitacion(Fecha *fechaEntrada,Fecha *fechaSalida,int nroHabitacion){
+ReservaHabitacion::ReservaHabitacion(Fecha &fechaEntrada,Fecha &fechaSalida,int nroHabitacion){
 	this->fechaEntrada = fechaEntrada;
 	this->fechaSalida = fechaSalida;
 	this->nroHabitacion = nroHabitacion;
@@ -25,11 +25,11 @@ int ReservaHabitacion::getNroHabitacion(){
 	return nroHabitacion;
 };
 
-Fecha *ReservaHabitacion::getFechaSalida(){
+Fecha ReservaHabitacion::getFechaSalida(){
 	return fechaSalida;
 };
 
-Fecha *ReservaHabitacion::getFechaEntrada(){
+Fecha ReservaHabitacion::getFechaEntrada(){
 	return fechaEntrada;
 };
 
@@ -63,8 +63,8 @@ void ReservaHabitacion::listarInfo(){
 	cout<<"\n";
 	cout << "--------- Reserva: " << codigo << "---------" << endl;
 	cout << "Numero de Habiacion: " << nroHabitacion << endl;
-	cout << "Fecha de entrada: " << *fechaEntrada << endl;
-	cout << "Fecha de salida: " << *fechaSalida << endl;
+	cout << "Fecha de entrada: " << fechaEntrada << endl;
+	cout << "Fecha de salida: " << fechaSalida << endl;
 }
 
 ReservaHabitacion::~ReservaHabitacion(){

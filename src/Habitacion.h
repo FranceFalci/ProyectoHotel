@@ -20,8 +20,8 @@ public:
     int getCodigo();
     int getCapacidad();
     float getSenia(int nroReserva);
-    void crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
-    bool estaDisponible(Fecha *fechaInicio, Fecha *fechaFin);
+    void crearReserva(Fecha &fechaEntrada, Fecha &fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono);
+    bool estaDisponible(Fecha &fechaInicio, Fecha &fechaFin);
     void listarInfo();
     void agregarHuesped(string nombre, string dni, int nroReserva);
     void agregarHuesped(string nombre,string apellido, string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono, int nroReserva);

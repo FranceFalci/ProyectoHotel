@@ -14,13 +14,13 @@ using namespace std;
 class ReservaAmenities {
 private:
 	string nombreAmenities;
-	Fecha *fecha;
+	Fecha fecha;
 	string hora;
 	string dni;
 	int nroHabitacion;
 public:
-	ReservaAmenities(Fecha *fecha, string hora, string dni, int nroHabitacion);
-	Fecha *getFecha();
+	ReservaAmenities(Fecha &fecha, string hora, string dni, int nroHabitacion,string nombre);
+	Fecha getFecha();
 	string getNombre();
 	string getHora();
 	virtual ~ReservaAmenities();

@@ -34,7 +34,7 @@ public:
 	bool esAnioBisiesto(void) const;
 	long int cantidadDiasDelAnio() const;
 	int diferenciaEnDias(const Fecha &otraFecha) const;
-	bool sonIguales(Fecha &fecha2);
+	bool sonIguales( const Fecha &fecha2);
 
 
 	//Sobrecarga de operadores

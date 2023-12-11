@@ -14,18 +14,18 @@
 
 class ReservaHabitacion {
 	static int autonumerico;
-	Fecha *fechaEntrada;
-	Fecha *fechaSalida;
+	Fecha fechaEntrada;
+	Fecha fechaSalida;
 	int codigo;
 	int nroHabitacion;
 	vector<Consumo*> consumos;
 	vector<Huesped*> huespedes;
 public:
-	ReservaHabitacion(Fecha *fechaEntrada, Fecha *fechaSalida, int nroHabitacion);
+	ReservaHabitacion(Fecha &fechaEntrada, Fecha &fechaSalida, int nroHabitacion);
 	int getCodigo();
 	int getNroHabitacion();
-	Fecha *getFechaSalida();
-	Fecha *getFechaEntrada();
+	Fecha getFechaSalida();
+	Fecha getFechaEntrada();
 	int cantidadDias();
 
 	void agregarHuesped(string nombre, string dni);

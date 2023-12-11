@@ -7,14 +7,15 @@
 
 #include "ReservaAmenities.h"
 
-ReservaAmenities::ReservaAmenities(Fecha *fecha, string hora, string dni, int nroHabitacion) {
+ReservaAmenities::ReservaAmenities(Fecha &fecha, string hora, string dni, int nroHabitacion,string nombre) {
 	this->fecha = fecha;
 	this->hora = hora;
 	this->dni = dni;
 	this->nroHabitacion = nroHabitacion;
+	this->nombreAmenities = nombre;
 }
 
-Fecha *ReservaAmenities::getFecha(){
+Fecha ReservaAmenities::getFecha(){
 	return fecha;
 }
 

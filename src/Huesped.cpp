@@ -13,6 +13,11 @@ Huesped::Huesped(string nombre, string dni, int nroHabitacion) {
     this->nroHabitacion = nroHabitacion;
 }
 
+Huesped::Huesped(string nombre, string dni){
+	this->nombre = nombre;
+	this->dni = dni;
+}
+
 Huesped::Huesped(string nombre, string apellido, int nroHabitacion, string dni, string nacionalidad, string provincia, string mail, string domicilio, string patente, string telefono) {
     this->nombre = nombre;
     this->apellido = apellido;

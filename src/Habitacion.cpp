@@ -1,12 +1,15 @@
 #include "Habitacion.h"
-int Habitacion::autonumerico = 1;
+int Habitacion::autonumerico = 0;
 
 Habitacion::Habitacion(int nroCamas, int capacidad, float precioBase) {
+//	  cout << "Before autonumerico: " << autonumerico << endl;
 	this->nroHabitacion = autonumerico++;
     this->nroCamas = nroCamas;
     this->capacidad = capacidad;
     this->precioBase = precioBase;
-    this->Reservas = {};
+	    cout << "nro hab : " << nroHabitacion << endl;
+	    cout<<"hab crada"<<endl;
+//    this->Reservas = {};
 }
 
 
@@ -38,8 +41,9 @@ float Habitacion::getSenia(int nroReserva){
     return calcularCostoTotalReserva(nroReserva)*0.3;
 }
 
-void Habitacion::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono){
-    ReservaHabitacion *reserva= new ReservaHabitacion(fechaEntrada, fechaSalida, nroHabitacion);
+void Habitacion::crearReserva(Fecha &fechaEntrada, Fecha &fechaSalida, string nombre,string apellido,string dni,string nacionalidad,string provincia,string mail,string domicilio,string patente,string telefono){
+
+    ReservaHabitacion *reserva= new ReservaHabitacion(fechaEntrada, fechaSalida,  this->nroHabitacion);
     reserva->agregarHuesped(nombre, apellido, dni, nacionalidad, provincia, mail, domicilio, patente, telefono);
     Reservas.push_back(reserva);
     
@@ -49,9 +53,9 @@ void Habitacion::crearReserva(Fecha *fechaEntrada, Fecha *fechaSalida, string no
     Reservas[indiceReserva]->agregarHuesped(nombre, apellido, dni, nacionalidad, provincia, mail, domicilio, patente, telefono);  //Da error por el momento porque no esta implementad el metodo agregarHuesped*/
 }
 
-bool Habitacion::estaDisponible(Fecha *fechaInicio, Fecha *fechaFin){
+bool Habitacion::estaDisponible(Fecha &fechaInicio, Fecha &fechaFin){
 	for (size_t i = 0; i < Reservas.size(); ++i) {
-		if (!(fechaFin <= Reservas[i]->getFechaEntrada() || fechaInicio >= Reservas[i]->getFechaSalida())) {
+		if (!(Reservas[i]->getFechaEntrada() >= fechaFin || fechaInicio >= Reservas[i]->getFechaSalida())) {
 			return false;
 		}
 	}
@@ -59,16 +63,21 @@ bool Habitacion::estaDisponible(Fecha *fechaInicio, Fecha *fechaFin){
 }
 
 void Habitacion::listarInfo(){
-    cout << "Número de Habitación: " << nroHabitacion <<endl;
     cout << "Número de Camas: " << nroCamas <<endl;
+    cout << "Número de Habitación: " << nroHabitacion <<endl;
     cout << "Capacidad: " << capacidad <<endl;
     cout << "Precio Base: $" << precioBase <<endl;
 }
 
 void Habitacion::agregarHuesped(string nombre, string dni, int nroReserva) {
     ReservaHabitacion* reserva = buscarReserva(nroReserva);
+    if(reserva != nullptr){
+
     reserva->agregarHuesped(nombre, dni);
     cout << "Acompañante agregado con exito." <<endl;  //solo para hacer el control, despues sacar
+    }else{
+    	cout<<"reserva no encontrada"<<endl;
+    }
 }
 
 float Habitacion::calcularCostoRestante(int nroReserva){
